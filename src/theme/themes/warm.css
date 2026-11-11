@@ -1,0 +1,59 @@
+/* Demo theme "warm" (cream + terracotta), colours taken from design/proposals/1-warm-kitchen.html. */
+:root[data-theme='warm'] {
+  --color-bg: #fbf5ea;
+  --color-surface: #fffdf8;
+  --color-surface-2: #f3e9d6;
+  --color-text: #2d2118;
+  --color-text-muted: #6b5a4a;
+  --color-primary: #b4512f;
+  --color-on-primary: #ffffff;
+  --color-accent: #c99a2e;
+  --color-border: #e2d3b9;
+  --color-danger: #b3261e;
+  --color-success: #2e7d46;
+  --color-focus: #1a5fd0;
+  --font-body: 'Source Sans 3', system-ui, sans-serif;
+  --font-heading: Lora, Georgia, serif;
+  --font-size-base: 20px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --shadow-1: 0 1px 3px rgb(80 50 20 / 0.14);
+  --shadow-2: 0 6px 16px rgb(80 50 20 / 0.18);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-theme='warm']:not([data-mode='light']) {
+    --color-bg: #1c1612;
+    --color-surface: #261e18;
+    --color-surface-2: #31271f;
+    --color-text: #f3e9da;
+    --color-text-muted: #b9a893;
+    --color-primary: #e07a55;
+    --color-on-primary: #1c1612;
+    --color-accent: #e3b84f;
+    --color-border: #4a3b2f;
+    --color-danger: #f2877f;
+    --color-success: #7fcf95;
+    --color-focus: #7fb0ff;
+    --shadow-1: 0 1px 3px rgb(0 0 0 / 0.5);
+    --shadow-2: 0 6px 16px rgb(0 0 0 / 0.6);
+  }
+}
+
+:root[data-theme='warm'][data-mode='dark'] {
+  --color-bg: #1c1612;
+  --color-surface: #261e18;
+  --color-surface-2: #31271f;
+  --color-text: #f3e9da;
+  --color-text-muted: #b9a893;
+  --color-primary: #e07a55;
+  --color-on-primary: #1c1612;
+  --color-accent: #e3b84f;
+  --color-border: #4a3b2f;
+  --color-danger: #f2877f;
+  --color-success: #7fcf95;
+  --color-focus: #7fb0ff;
+  --shadow-1: 0 1px 3px rgb(0 0 0 / 0.5);
+  --shadow-2: 0 6px 16px rgb(0 0 0 / 0.6);
+}

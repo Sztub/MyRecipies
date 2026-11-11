@@ -1,0 +1,74 @@
+/* Theme "zielnik" (herbarium: pressed-paper cream, sage green, terracotta, botanical sprig).
+   Source: design/style-lab.html. Decorations live in zielnik.decor.css. */
+:root[data-theme='zielnik'] {
+  --color-bg: #f2efe4;
+  --color-surface: #fbfaf4;
+  --color-surface-2: #ebe8d9;
+  --color-text: #26302a;
+  --color-text-muted: #5e6b60;
+  --color-primary: #4f6b3a;
+  --color-on-primary: #ffffff;
+  --color-accent: #b5683a;
+  --color-border: #d7d6c3;
+  --color-danger: #a8322a;
+  --color-success: #3f6e3a;
+  --color-focus: #1a5fd0;
+  --font-body: 'Nunito', system-ui, sans-serif;
+  --font-heading: 'Fraunces', Georgia, serif;
+  --font-size-base: 20px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 18px;
+  --shadow-1: 0 1px 2px rgb(40 50 30 / 0.1);
+  --shadow-2: 0 8px 24px rgb(40 50 30 / 0.14);
+
+  /* decor tokens (see tokens.css) */
+  --gold-line: var(--color-border);
+  --texture-bg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.6' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 .3 0 0 0 0 .35 0 0 0 0 .2 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --texture-surface: none;
+  --gradient-primary: none;
+  --header-bg: var(--color-primary);
+  --header-text: var(--color-on-primary);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-theme='zielnik']:not([data-mode='light']) {
+    --color-bg: #121814;
+    --color-surface: #1b231e;
+    --color-surface-2: #243029;
+    --color-text: #e7ece4;
+    --color-text-muted: #a9b5aa;
+    --color-primary: #a7c584;
+    --color-on-primary: #121814;
+    --color-accent: #e39a6c;
+    --color-border: #34413a;
+    --color-danger: #f2877f;
+    --color-success: #a7c584;
+    --color-focus: #7fb0ff;
+    --shadow-1: 0 1px 2px rgb(0 0 0 / 0.5);
+    --shadow-2: 0 8px 24px rgb(0 0 0 / 0.5);
+    --texture-bg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.6' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 .8 0 0 0 0 .9 0 0 0 0 .7 0 0 0 .04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    --header-bg: #1b231e;
+    --header-text: #e7ece4;
+  }
+}
+
+:root[data-theme='zielnik'][data-mode='dark'] {
+  --color-bg: #121814;
+  --color-surface: #1b231e;
+  --color-surface-2: #243029;
+  --color-text: #e7ece4;
+  --color-text-muted: #a9b5aa;
+  --color-primary: #a7c584;
+  --color-on-primary: #121814;
+  --color-accent: #e39a6c;
+  --color-border: #34413a;
+  --color-danger: #f2877f;
+  --color-success: #a7c584;
+  --color-focus: #7fb0ff;
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.5);
+  --shadow-2: 0 8px 24px rgb(0 0 0 / 0.5);
+  --texture-bg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.6' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 .8 0 0 0 0 .9 0 0 0 0 .7 0 0 0 .04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --header-bg: #1b231e;
+  --header-text: #e7ece4;
+}

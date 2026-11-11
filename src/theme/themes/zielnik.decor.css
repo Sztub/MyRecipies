@@ -1,0 +1,126 @@
+/*
+ * Decorations for theme "zielnik": pressed botanical sprig in the corner of the recipe page, italic serif
+ * headings with a thin rule, arched photo, round buttons.
+ * Targets the stable [data-ui] / [data-ornament] hooks (see src/theme/README.md), never CSS-module class names.
+ */
+:root[data-theme='zielnik'] {
+  & [data-ui='app-header'] {
+    background: var(--header-bg);
+    color: var(--header-text);
+    border-bottom: 1px solid var(--color-border);
+  }
+  & [data-ui='app-title'] {
+    font-size: 1.45rem;
+    font-weight: 500;
+    font-style: italic;
+  }
+
+  /* Recipe page: a herbarium sheet, room on the right for the sprig. */
+  & [data-ui='sheet'] {
+    position: relative;
+    max-width: 52rem;
+    margin-inline: auto;
+    padding: var(--space-6) 150px var(--space-6) var(--space-6);
+    background-color: var(--color-surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-2);
+    overflow: hidden;
+  }
+  & [data-ui='sheet'] > :not([data-ornament]) {
+    position: relative; /* above the sprig */
+  }
+  & [data-ornament='sprig'] {
+    display: block;
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    width: 170px;
+    height: 200px;
+    opacity: 0.9;
+    pointer-events: none;
+    color: var(--color-primary);
+  }
+
+  & [data-ui='sheet-title'] {
+    font-size: 2.6em;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+
+  /* Section headings: italic serif followed by a thin rule. */
+  & [data-ui='section-heading'] {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    font-size: 1.45em;
+    font-weight: 500;
+    font-style: italic;
+    color: var(--color-primary);
+  }
+  & [data-ui='section-heading']::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--color-border);
+  }
+
+  /* Pill buttons under the recipe. */
+  & [data-ui='sheet-actions'] > * {
+    border-radius: 999px;
+  }
+
+  /* Recipe photo: arched window (portrait crop). */
+  & [data-ui='photo'] {
+    align-self: center;
+    width: min(100%, 340px);
+  }
+  & [data-ui='photo'] img {
+    display: block;
+    width: 100%;
+    max-height: none;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: 50% 50% var(--radius-lg) var(--radius-lg) / 40% 40% var(--radius-lg)
+      var(--radius-lg);
+    box-shadow: var(--shadow-1);
+  }
+
+  /* Cooking mode: herbarium sheet with an italic serif step counter. */
+  & [data-ui='cooking'] {
+    background-color: var(--color-bg);
+    background-image: var(--texture-bg);
+  }
+  & [data-ui='cooking-step'] {
+    background-color: var(--color-surface);
+  }
+  & [data-ui='cooking-counter'] {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-style: italic;
+    font-weight: 500;
+    color: var(--color-primary);
+  }
+}
+
+/* Phones: the sprig moves above the title instead of taking a column. */
+@media (max-width: 600px) {
+  :root[data-theme='zielnik'] {
+    & [data-ui='sheet'] {
+      padding: 112px var(--space-4) var(--space-5);
+      margin-inline: calc(var(--space-2) * -1);
+    }
+    & [data-ornament='sprig'] {
+      top: 4px;
+      right: 4px;
+      width: 92px;
+      height: 108px;
+    }
+    & [data-ui='photo'] {
+      width: min(100%, 260px);
+    }
+    & [data-ui='sheet-title'] {
+      font-size: 2.1em;
+    }
+  }
+}

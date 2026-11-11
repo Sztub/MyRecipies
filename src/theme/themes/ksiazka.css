@@ -1,0 +1,75 @@
+/* Theme "ksiazka" (old cookbook: parchment, oxblood, gold). Dark = leather-bound edition.
+   Source: design/style-lab.html. Decorations live in ksiazka.decor.css. */
+:root[data-theme='ksiazka'] {
+  --color-bg: #cdb98e;
+  --color-surface: #f6ecd4;
+  --color-surface-2: #ede0c0;
+  --color-text: #2b1d10;
+  --color-text-muted: #6e5638;
+  --color-primary: #7a2e1d;
+  --color-on-primary: #f8efd9;
+  --color-accent: #a8832f;
+  --color-border: #cdb88c;
+  --color-danger: #9e2a1e;
+  --color-success: #4b6b2a;
+  --color-focus: #1a5fd0;
+  --font-body: 'EB Garamond', Georgia, serif;
+  --font-heading: 'Cormorant Garamond', Georgia, serif;
+  --font-size-base: 21px;
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 4px;
+  --shadow-1: 0 1px 2px rgb(60 35 10 / 0.25);
+  --shadow-2: 0 10px 30px rgb(60 35 10 / 0.35);
+
+  /* decor tokens (see tokens.css) */
+  --gold: linear-gradient(135deg, #8a6a22 0%, #e9cf7a 45%, #b08d3c 60%, #f3dd96 80%, #8a6a22 100%);
+  --gold-line: #b08d3c;
+  --texture-bg: radial-gradient(ellipse at center, transparent 40%, rgb(60 35 10 / 0.35) 100%);
+  --texture-surface:
+    radial-gradient(ellipse at 30% 20%, rgb(255 250 235 / 0.6), transparent 60%),
+    radial-gradient(ellipse at 80% 90%, rgb(150 110 50 / 0.12), transparent 55%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .25 0 0 0 0 .1 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --gradient-primary: linear-gradient(#8f3a26, #6a2517);
+  --header-bg: #5e2216;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-theme='ksiazka']:not([data-mode='light']) {
+    --color-bg: #120c08;
+    --color-surface: #2a1b13;
+    --color-surface-2: #352318;
+    --color-text: #efe2c4;
+    --color-text-muted: #bfa982;
+    --color-primary: #d9b45a;
+    --color-on-primary: #2a1b13;
+    --color-accent: #d9b45a;
+    --color-border: #5a4128;
+    --color-danger: #f08a7a;
+    --color-success: #a9c77a;
+    --color-focus: #7fb0ff;
+    --texture-bg: radial-gradient(ellipse at center, #2a1b13 0, #120c08 75%);
+    --texture-surface: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .25 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    --gradient-primary: var(--gold);
+    --header-bg: #1e130d;
+  }
+}
+
+:root[data-theme='ksiazka'][data-mode='dark'] {
+  --color-bg: #120c08;
+  --color-surface: #2a1b13;
+  --color-surface-2: #352318;
+  --color-text: #efe2c4;
+  --color-text-muted: #bfa982;
+  --color-primary: #d9b45a;
+  --color-on-primary: #2a1b13;
+  --color-accent: #d9b45a;
+  --color-border: #5a4128;
+  --color-danger: #f08a7a;
+  --color-success: #a9c77a;
+  --color-focus: #7fb0ff;
+  --texture-bg: radial-gradient(ellipse at center, #2a1b13 0, #120c08 75%);
+  --texture-surface: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .25 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --gradient-primary: var(--gold);
+  --header-bg: #1e130d;
+}

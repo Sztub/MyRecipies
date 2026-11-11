@@ -1,0 +1,88 @@
+/*
+ * Default (neutral) theme + token contract. See src/theme/README.md.
+ * Mode: light by default; dark when the OS asks for it (and no explicit mode is set),
+ * or when <html data-mode="dark"> is set. <html data-mode="light"> forces light.
+ * Extra themes live in ./themes/*.css and are scoped by :root[data-theme="<name>"]; the default dark palette
+ * applies only to the default theme, so a new theme never needs a :not() here.
+ */
+@import './fonts.css';
+@import './themes/warm.css';
+@import './themes/ksiazka.css';
+@import './themes/ksiazka.decor.css';
+@import './themes/notes.css';
+@import './themes/notes.decor.css';
+@import './themes/zielnik.css';
+@import './themes/zielnik.decor.css';
+
+:root {
+  --color-bg: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-2: #f3f3f3;
+  --color-text: #1a1a1a;
+  --color-text-muted: #5c5c5c;
+  --color-primary: #2f6f4f;
+  --color-on-primary: #ffffff;
+  --color-accent: #b5532f;
+  --color-border: #d8d8d8;
+  --color-danger: #b3261e;
+  --color-success: #1e7a3c;
+  --color-focus: #1a5fd0;
+  --font-body: system-ui, sans-serif;
+  --font-heading: system-ui, sans-serif;
+  --font-size-base: 18px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.12);
+  --shadow-2: 0 4px 12px rgb(0 0 0 / 0.16);
+
+  /* Decor tokens: optional theme textures/gradients, used as background-image (none = plain). */
+  --texture-bg: none; /* page background (body, cooking mode) */
+  --texture-surface: none; /* cards, panels, menu */
+  --gradient-primary: none; /* primary buttons */
+  --gold: none; /* metallic gradient for ornaments / gilded text */
+  --gold-line: var(--color-accent);
+  --header-bg: var(--color-primary);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:is(:not([data-theme]), [data-theme='default']):not([data-mode='light']) {
+    --color-bg: #121412;
+    --color-surface: #1b1e1b;
+    --color-surface-2: #252925;
+    --color-text: #ecefec;
+    --color-text-muted: #a6aca6;
+    --color-primary: #6fcf97;
+    --color-on-primary: #0d1f14;
+    --color-accent: #e8895f;
+    --color-border: #3a3f3a;
+    --color-danger: #f2877f;
+    --color-success: #6fcf97;
+    --color-focus: #7fb0ff;
+    --shadow-1: 0 1px 2px rgb(0 0 0 / 0.5);
+    --shadow-2: 0 4px 12px rgb(0 0 0 / 0.6);
+  }
+}
+
+:root:is(:not([data-theme]), [data-theme='default'])[data-mode='dark'] {
+  --color-bg: #121412;
+  --color-surface: #1b1e1b;
+  --color-surface-2: #252925;
+  --color-text: #ecefec;
+  --color-text-muted: #a6aca6;
+  --color-primary: #6fcf97;
+  --color-on-primary: #0d1f14;
+  --color-accent: #e8895f;
+  --color-border: #3a3f3a;
+  --color-danger: #f2877f;
+  --color-success: #6fcf97;
+  --color-focus: #7fb0ff;
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.5);
+  --shadow-2: 0 4px 12px rgb(0 0 0 / 0.6);
+}

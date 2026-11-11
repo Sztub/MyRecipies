@@ -1,0 +1,143 @@
+.shell {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  /* Installed iOS app with viewport-fit=cover: keep clear of the status bar / notch. */
+  padding-top: calc(var(--space-2) + env(safe-area-inset-top));
+  background: var(--header-bg);
+  color: var(--color-on-primary);
+  font-family: var(--font-heading);
+}
+.title {
+  margin: 0;
+  font-size: 1.25rem;
+}
+.menuButton {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+/* iOS-style back link, top left on sub-pages; the header is sticky so it is always in reach. */
+.backButton {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-left: calc(var(--space-2) * -1);
+  padding: 0 var(--space-2);
+  border-radius: 8px;
+  color: inherit;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  text-decoration: none;
+}
+.backButton span {
+  font-size: 1.75rem;
+  line-height: 1;
+}
+.backButton ~ .title {
+  font-size: 1.1rem;
+}
+.menuButton:first-child {
+  margin-left: calc(var(--space-2) * -1);
+}
+.backButton:focus-visible,
+.menuButton:focus-visible,
+.link:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: -3px;
+}
+.body {
+  flex: 1;
+  display: flex;
+}
+.main {
+  flex: 1;
+  min-width: 0;
+  padding: var(--space-4);
+}
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  background: rgb(0 0 0 / 45%);
+}
+/* Mobile: off-canvas drawer. visibility keeps closed links out of tab order and a11y tree. */
+.menu {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 20;
+  width: min(280px, 80vw);
+  padding: 68px 0 var(--space-4);
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface);
+  border-right: 1px solid var(--color-border);
+  transform: translateX(-100%);
+  visibility: hidden;
+  transition:
+    transform 0.2s ease,
+    visibility 0.2s;
+  background-image: var(--texture-surface);
+}
+.menuOpen {
+  transform: none;
+  visibility: visible;
+  /* Visible at once when opening, so focus can move into the drawer; the delay applies only on close. */
+  transition: transform 0.2s ease;
+}
+.link {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-4);
+  color: var(--color-text);
+  text-decoration: none;
+  border-left: 4px solid transparent;
+}
+.link[aria-current='page'] {
+  color: var(--color-primary);
+  font-weight: 700;
+  border-left-color: var(--color-primary);
+  background: var(--color-surface-2);
+}
+/* Wide screens: permanent sidebar, no toggle button. */
+@media (min-width: 900px) {
+  .menuButton {
+    display: none;
+  }
+  .backdrop {
+    display: none;
+  }
+  .menu {
+    position: sticky;
+    top: 56px;
+    align-self: flex-start;
+    height: calc(100dvh - 56px);
+    width: 240px;
+    padding-top: var(--space-3);
+    transform: none;
+    visibility: visible;
+    transition: none;
+    z-index: auto;
+  }
+}

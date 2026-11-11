@@ -1,0 +1,280 @@
+/*
+ * Decorations for theme "notes": the recipe page is a sheet of a spiral notepad (ruled lines, red margin),
+ * the title is marked with a highlighter, section headings are underlined with a wavy pen line, photos are
+ * taped polaroids. Dark = chalkboard in a wooden frame.
+ * Targets the stable [data-ui] / [data-ornament] hooks (see src/theme/README.md), never CSS-module class names.
+ */
+:root[data-theme='notes'] {
+  /* App header = top of the notepad: paper with a handwritten red title. */
+  & [data-ui='app-header'] {
+    background: var(--header-bg);
+    color: var(--color-text);
+    border-bottom: 2px solid var(--notes-margin);
+    box-shadow: 0 1px 0 var(--color-border);
+  }
+  & [data-ui='app-title'] {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--color-primary);
+    transform: rotate(-2deg);
+  }
+
+  /* Recipe page: ruled paper, red margin, stacked-sheets edge, spiral binding along the top. */
+  & [data-ui='sheet'] {
+    position: relative;
+    max-width: 52rem;
+    margin-inline: auto;
+    padding: 64px 32px 40px 84px;
+    line-height: var(--notes-line);
+    border-radius: 2px 2px 6px 6px;
+    background:
+      linear-gradient(90deg, transparent 62px, var(--notes-margin) 62px 64px, transparent 64px),
+      repeating-linear-gradient(
+        180deg,
+        transparent 0 calc(var(--notes-line) - 1px),
+        var(--color-border) calc(var(--notes-line) - 1px) var(--notes-line)
+      ),
+      var(--color-surface);
+    background-position:
+      0 0,
+      0 18px,
+      0 0;
+    box-shadow:
+      0 1px 0 #e9e2c6,
+      0 3px 0 #f4eed6,
+      0 4px 0 #d9d0b2,
+      0 6px 0 #f1ead0,
+      var(--shadow-2);
+  }
+  /* spiral binding: punched holes with a ring shadow */
+  & [data-ui='sheet']::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 24px;
+    right: 24px;
+    height: 22px;
+    pointer-events: none;
+    background: radial-gradient(
+        circle at 11px 11px,
+        var(--color-bg) 0 6px,
+        rgb(0 0 0 / 0.25) 6.5px 7.5px,
+        transparent 8px
+      )
+      0 0 / 34px 22px repeat-x;
+  }
+
+  /* Title: highlighter stroke behind each line, slightly tilted. */
+  & [data-ui='sheet-title'] {
+    align-self: flex-start;
+    margin-left: -6px;
+    padding: 0 6px;
+    font-size: 2.8em;
+    font-weight: 700;
+    line-height: 1.1;
+    transform: rotate(-1.2deg);
+    transform-origin: left;
+    background: repeating-linear-gradient(
+      transparent 0 0.58lh,
+      var(--color-accent) 0.58lh 0.9lh,
+      transparent 0.9lh 1lh
+    );
+  }
+  & [data-ui='sheet-meta'] {
+    margin-block: 0;
+  }
+
+  /* Section headings: red pen with a wavy underline. */
+  & [data-ui='section-heading'] {
+    font-size: 1.9em;
+    font-weight: 700;
+    line-height: var(--notes-line);
+    color: var(--color-primary);
+    text-decoration: underline wavy;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 6px;
+  }
+
+  /* Hand-drawn buttons under the recipe. */
+  & [data-ui='sheet-actions'] > * {
+    border-width: 2px;
+    border-radius: 14px 4px 12px 5px / 5px 12px 4px 14px;
+  }
+
+  /* Recipe photo: polaroid taped to the page. */
+  & [data-ui='photo'] {
+    position: relative;
+    align-self: flex-end;
+    max-width: min(100%, 420px);
+    margin: var(--space-3) var(--space-2) var(--space-3) 0;
+    transform: rotate(2deg);
+  }
+  & [data-ui='photo'] img {
+    display: block;
+    width: 100%;
+    max-height: 60vh;
+    object-fit: cover;
+    border: 8px solid #fff;
+    border-bottom-width: 28px;
+    border-radius: 0;
+    box-shadow: var(--shadow-2);
+  }
+  & [data-ui='photo']::before {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    top: -14px;
+    left: 40%;
+    width: 110px;
+    height: 30px;
+    pointer-events: none;
+    background: var(--notes-tape);
+    transform: rotate(-4deg);
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.15);
+  }
+
+  /* Cooking mode: one big notepad sheet with the red margin. */
+  & [data-ui='cooking'] {
+    background-color: var(--color-bg);
+    background-image: var(--texture-bg);
+  }
+  & [data-ui='cooking-step'] {
+    padding-left: 56px;
+    background:
+      linear-gradient(90deg, transparent 38px, var(--notes-margin) 38px 40px, transparent 40px),
+      var(--color-surface);
+  }
+  & [data-ui='cooking-counter'] {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+}
+
+/* Chalkboard (dark): slate in a wooden frame, chalk-soft text, no binding or highlighter. */
+@media (prefers-color-scheme: dark) {
+  :root[data-theme='notes']:not([data-mode='light']) {
+    & [data-ui='app-header'] {
+      color: #f1f0e8;
+      border-bottom: 0;
+      box-shadow: 0 2px 6px rgb(0 0 0 / 0.5);
+    }
+    & [data-ui='app-title'] {
+      color: var(--color-primary);
+    }
+    & [data-ui='sheet'] {
+      padding: 40px 32px;
+      background-color: var(--color-surface);
+      background-image: var(--texture-surface);
+      background-position: 0 0;
+      border: 14px solid #6b4a2e;
+      border-radius: 4px;
+      box-shadow:
+        inset 0 0 40px rgb(0 0 0 / 0.5),
+        var(--shadow-2);
+      text-shadow: 0 0 1px rgb(255 255 255 / 0.35);
+    }
+    & [data-ui='sheet']::before {
+      display: none;
+    }
+    & [data-ui='sheet-title'] {
+      background: none;
+      text-shadow: 0 0 1px rgb(255 255 255 / 0.5);
+    }
+    & [data-ui='photo'] img {
+      border-color: #ddd;
+      filter: grayscale(0.3);
+    }
+    & [data-ui='cooking-step'] {
+      background-color: var(--color-surface);
+      background-image: var(--texture-surface);
+      box-shadow: inset 0 0 40px rgb(0 0 0 / 0.5);
+      text-shadow: 0 0 1px rgb(255 255 255 / 0.35);
+      padding-left: var(--space-4);
+    }
+  }
+}
+:root[data-theme='notes'][data-mode='dark'] {
+  & [data-ui='app-header'] {
+    color: #f1f0e8;
+    border-bottom: 0;
+    box-shadow: 0 2px 6px rgb(0 0 0 / 0.5);
+  }
+  & [data-ui='app-title'] {
+    color: var(--color-primary);
+  }
+  & [data-ui='sheet'] {
+    padding: 40px 32px;
+    background-color: var(--color-surface);
+    background-image: var(--texture-surface);
+    background-position: 0 0;
+    border: 14px solid #6b4a2e;
+    border-radius: 4px;
+    box-shadow:
+      inset 0 0 40px rgb(0 0 0 / 0.5),
+      var(--shadow-2);
+    text-shadow: 0 0 1px rgb(255 255 255 / 0.35);
+  }
+  & [data-ui='sheet']::before {
+    display: none;
+  }
+  & [data-ui='sheet-title'] {
+    background: none;
+    text-shadow: 0 0 1px rgb(255 255 255 / 0.5);
+  }
+  & [data-ui='photo'] img {
+    border-color: #ddd;
+    filter: grayscale(0.3);
+  }
+  & [data-ui='cooking-step'] {
+    background-color: var(--color-surface);
+    background-image: var(--texture-surface);
+    box-shadow: inset 0 0 40px rgb(0 0 0 / 0.5);
+    text-shadow: 0 0 1px rgb(255 255 255 / 0.35);
+    padding-left: var(--space-4);
+  }
+}
+
+/* Phones: narrower margin so the text keeps its width. */
+@media (max-width: 600px) {
+  :root[data-theme='notes'] {
+    & [data-ui='sheet'] {
+      padding: 52px 16px 32px 52px;
+      margin-inline: calc(var(--space-2) * -1);
+      background-image:
+        linear-gradient(90deg, transparent 38px, var(--notes-margin) 38px 40px, transparent 40px),
+        repeating-linear-gradient(
+          180deg,
+          transparent 0 calc(var(--notes-line) - 1px),
+          var(--color-border) calc(var(--notes-line) - 1px) var(--notes-line)
+        );
+    }
+    & [data-ui='sheet']::before {
+      left: 12px;
+      right: 12px;
+    }
+    & [data-ui='sheet-title'] {
+      font-size: 2.2em;
+    }
+    & [data-ui='section-heading'] {
+      font-size: 1.6em;
+    }
+    & [data-ui='photo']::before {
+      width: 80px;
+    }
+  }
+  :root[data-theme='notes'][data-mode='dark'] [data-ui='sheet'] {
+    padding: 28px 16px;
+    border-width: 8px;
+    background-image: var(--texture-surface);
+  }
+}
+@media (max-width: 600px) and (prefers-color-scheme: dark) {
+  :root[data-theme='notes']:not([data-mode='light']) [data-ui='sheet'] {
+    padding: 28px 16px;
+    border-width: 8px;
+    background-image: var(--texture-surface);
+  }
+}

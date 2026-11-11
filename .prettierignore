@@ -1,0 +1,6 @@
+# Hand-written docs: never reformat
+*.md
+design/
+plan/
+package-lock.json
+dist/

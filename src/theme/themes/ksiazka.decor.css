@@ -1,0 +1,180 @@
+/*
+ * Decorations for theme "ksiazka": gold frame + corner fleurons + crest on the recipe page, gold headings, drop cap.
+ * Targets the stable [data-ui] / [data-ornament] hooks (see src/theme/README.md), never CSS-module class names.
+ */
+:root[data-theme='ksiazka'] {
+  /* App header = leather cover with a gold title and a double gold rule. */
+  & [data-ui='app-header'] {
+    background: var(--header-bg);
+    color: #f3e4bd;
+    border-bottom: 3px double var(--gold-line);
+  }
+  & [data-ui='app-title'] {
+    font-style: italic;
+    font-size: 1.5rem;
+    background: var(--gold);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  /* The recipe page is a book page: parchment, inner shadow, double gold frame. */
+  & [data-ui='sheet'] {
+    position: relative;
+    max-width: 52rem;
+    margin-inline: auto;
+    padding: 56px 64px;
+    background-color: var(--color-surface);
+    background-image: var(--texture-surface);
+    border-radius: var(--radius-lg);
+    box-shadow:
+      inset 0 0 60px rgb(120 80 30 / 0.25),
+      var(--shadow-2);
+  }
+  & [data-ui='sheet']::before {
+    content: '';
+    position: absolute;
+    inset: 14px;
+    pointer-events: none;
+    border: 2px solid transparent;
+    border-image: var(--gold) 1;
+    outline: 1px solid color-mix(in srgb, var(--gold-line) 55%, transparent);
+    outline-offset: -7px;
+  }
+  & [data-ui='sheet'] > :not([data-ornament]) {
+    position: relative; /* above the frame */
+  }
+  & [data-ornament^='corner'] {
+    display: block;
+    position: absolute;
+    width: 56px;
+    height: 56px;
+    pointer-events: none;
+  }
+  & [data-ornament='corner-tl'] { top: 8px; left: 8px; }
+  & [data-ornament='corner-tr'] { top: 8px; right: 8px; transform: scaleX(-1); }
+  & [data-ornament='corner-bl'] { bottom: 8px; left: 8px; transform: scaleY(-1); }
+  & [data-ornament='corner-br'] { bottom: 8px; right: 8px; transform: scale(-1); }
+  & [data-ornament='crest'] {
+    display: block;
+    width: 84px;
+    height: 84px;
+    margin: 0 auto calc(var(--space-2) * -1);
+  }
+
+  & [data-ui='sheet-title'] {
+    text-align: center;
+    font-size: 2.3em;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+  }
+  & [data-ui='sheet'] > [data-ui='sheet-meta'] {
+    text-align: center;
+    font-style: italic;
+  }
+  & [data-ui='sheet'] > [data-ui='sheet-actions'] {
+    justify-content: center;
+  }
+
+  /* Section headings: small caps between gold rules. */
+  & [data-ui='section-heading'] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    font-size: 1.45em;
+    font-weight: 700;
+    font-variant: small-caps;
+    letter-spacing: 0.08em;
+    color: var(--color-primary);
+  }
+  & [data-ui='section-heading']::before,
+  & [data-ui='section-heading']::after {
+    content: '';
+    flex: 0 1 2.5em;
+    height: 2px;
+    background: var(--gold);
+  }
+
+  /* Recipe photo: mounted print with a gold edge. */
+  & [data-ui='sheet'] img {
+    border: 6px solid var(--color-surface);
+    outline: 2px solid var(--gold-line);
+    box-shadow: var(--shadow-1);
+    filter: sepia(0.25) saturate(0.95);
+  }
+
+  /* Drop cap on prose (recipe notes). */
+  & [data-ui='prose']::first-letter {
+    float: left;
+    padding: 6px 8px 0 0;
+    font-family: var(--font-heading);
+    font-size: 3.6em;
+    font-weight: 700;
+    line-height: 0.8;
+    background: var(--gold);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  /* Cooking mode: parchment step page with a gold step counter. */
+  & [data-ui='cooking'] {
+    background-color: var(--color-bg);
+    background-image: var(--texture-bg);
+  }
+  & [data-ui='cooking-step'] {
+    background-color: var(--color-surface);
+    background-image: var(--texture-surface);
+    box-shadow: inset 0 0 60px rgb(120 80 30 / 0.2);
+  }
+  & [data-ui='cooking-counter'] {
+    font-family: var(--font-heading);
+    font-variant: small-caps;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+  }
+}
+
+/* Leather-bound edition (dark). */
+@media (prefers-color-scheme: dark) {
+  :root[data-theme='ksiazka']:not([data-mode='light']) [data-ui='sheet'] {
+    box-shadow:
+      inset 0 0 80px rgb(0 0 0 / 0.6),
+      var(--shadow-2);
+  }
+}
+:root[data-theme='ksiazka'][data-mode='dark'] [data-ui='sheet'] {
+  box-shadow:
+    inset 0 0 80px rgb(0 0 0 / 0.6),
+    var(--shadow-2);
+}
+
+/* Phones: lighter frame so the text keeps its width. */
+@media (max-width: 600px) {
+  :root[data-theme='ksiazka'] {
+    & [data-ui='sheet'] {
+      padding: 44px 22px 32px;
+      margin-inline: calc(var(--space-2) * -1);
+    }
+    & [data-ui='sheet']::before {
+      inset: 8px;
+    }
+    & [data-ornament^='corner'] {
+      width: 38px;
+      height: 38px;
+    }
+    & [data-ornament='corner-tl'] { top: 3px; left: 3px; }
+    & [data-ornament='corner-tr'] { top: 3px; right: 3px; }
+    & [data-ornament='corner-bl'] { bottom: 3px; left: 3px; }
+    & [data-ornament='corner-br'] { bottom: 3px; right: 3px; }
+    & [data-ornament='crest'] {
+      width: 64px;
+      height: 64px;
+    }
+    & [data-ui='sheet-title'] {
+      font-size: 1.9em;
+    }
+  }
+}

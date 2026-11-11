@@ -1,0 +1,86 @@
+/* Theme "notes" (old notepad: lined paper, blue ink, red margin, handwriting). Dark = chalkboard.
+   Source: design/style-lab.html. Decorations live in notes.decor.css. */
+:root[data-theme='notes'] {
+  --color-bg: #e6e0d2;
+  --color-surface: #fdf8e3;
+  --color-surface-2: #f6eecb;
+  --color-text: #1f3a6e;
+  --color-text-muted: #56688c;
+  --color-primary: #c0392b;
+  --color-on-primary: #ffffff;
+  --color-accent: #f3d64a;
+  --color-border: #bfd0e6;
+  --color-danger: #c0392b;
+  --color-success: #2e7d46;
+  --color-focus: #1a5fd0;
+  --font-body: 'Patrick Hand', 'Comic Sans MS', cursive;
+  --font-heading: 'Caveat', 'Comic Sans MS', cursive;
+  --font-size-base: 22px;
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 4px;
+  --shadow-1: 1px 2px 0 rgb(0 0 0 / 0.08);
+  --shadow-2: 2px 6px 14px rgb(40 30 10 / 0.22);
+
+  /* decor tokens (see tokens.css) */
+  --gold-line: var(--color-primary);
+  --texture-bg:
+    radial-gradient(circle at 20% 30%, rgb(0 0 0 / 0.05), transparent 40%),
+    repeating-linear-gradient(90deg, rgb(0 0 0 / 0.025) 0 2px, transparent 2px 9px);
+  --texture-surface: none;
+  --gradient-primary: none;
+  --header-bg: var(--color-surface);
+
+  /* theme-local (notes.decor.css only) */
+  --notes-line: 32px; /* ruled line spacing */
+  --notes-margin: #e8908a; /* red margin line */
+  --notes-tape: rgb(240 230 180 / 0.75);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-theme='notes']:not([data-mode='light']) {
+    --color-bg: #161c19;
+    --color-surface: #2b3832;
+    --color-surface-2: #33423b;
+    --color-text: #f1f0e8;
+    --color-text-muted: #b9c3ba;
+    --color-primary: #f6d365;
+    --color-on-primary: #2b3832;
+    --color-accent: #f3a0a0;
+    --color-border: #51645a;
+    --color-danger: #f3a0a0;
+    --color-success: #a8d8a0;
+    --color-focus: #9fc3ff;
+    --shadow-1: 0 1px 2px rgb(0 0 0 / 0.5);
+    --shadow-2: 0 6px 16px rgb(0 0 0 / 0.55);
+    --texture-bg: none;
+    --texture-surface:
+      radial-gradient(ellipse at 30% 30%, rgb(255 255 255 / 0.05), transparent 60%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    --header-bg: #6b4a2e; /* wooden board frame */
+    --notes-tape: rgb(240 230 180 / 0.55);
+  }
+}
+
+:root[data-theme='notes'][data-mode='dark'] {
+  --color-bg: #161c19;
+  --color-surface: #2b3832;
+  --color-surface-2: #33423b;
+  --color-text: #f1f0e8;
+  --color-text-muted: #b9c3ba;
+  --color-primary: #f6d365;
+  --color-on-primary: #2b3832;
+  --color-accent: #f3a0a0;
+  --color-border: #51645a;
+  --color-danger: #f3a0a0;
+  --color-success: #a8d8a0;
+  --color-focus: #9fc3ff;
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.5);
+  --shadow-2: 0 6px 16px rgb(0 0 0 / 0.55);
+  --texture-bg: none;
+  --texture-surface:
+    radial-gradient(ellipse at 30% 30%, rgb(255 255 255 / 0.05), transparent 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --header-bg: #6b4a2e;
+  --notes-tape: rgb(240 230 180 / 0.55);
+}

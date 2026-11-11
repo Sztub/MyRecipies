@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Recipes style 3: Recipe card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Merriweather:wght@400;700&display=swap">
+<style>
+/* Theme tokens: same names as src/theme/tokens.css. Port: copy the light/dark blocks into src/theme/themes/<name>.css under [data-theme="<name>"]. */
+:root{color-scheme:light dark;--font-body:'Merriweather',Georgia,serif;--font-heading:'Caveat','Segoe Script','Bradley Hand',cursive;--font-size-base:1.15rem;--radius-sm:2px;--radius-md:4px;--radius-lg:6px;--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:40px;--color-bg:#e9dfc9;--color-surface:#fffbee;--color-surface-2:#f1e6c7;--color-text:#2b2a33;--color-text-muted:#5d5a52;--color-primary:#2f5d8a;--color-on-primary:#fff;--color-accent:#a33a3a;--color-border:#cdbb8f;--color-danger:#a52222;--color-success:#2f6f3a;--color-focus:#0b5cd5;--shadow-1:2px 3px 0 rgba(120,95,40,.25);--shadow-2:3px 5px 0 rgba(120,95,40,.35)}
+@media (prefers-color-scheme:dark){:root:not([data-mode=light]){--color-bg:#1d1b17;--color-surface:#2a2720;--color-surface-2:#37332a;--color-text:#f1ead8;--color-text-muted:#bdb59f;--color-primary:#8fb8e6;--color-on-primary:#0e1a28;--color-accent:#e58a8a;--color-border:#51493a;--color-danger:#ff8a80;--color-success:#86c98f;--color-focus:#8ab4ff;--shadow-1:2px 3px 0 rgba(0,0,0,.5);--shadow-2:3px 5px 0 rgba(0,0,0,.6)}}
+:root[data-mode=dark]{color-scheme:dark;--color-bg:#1d1b17;--color-surface:#2a2720;--color-surface-2:#37332a;--color-text:#f1ead8;--color-text-muted:#bdb59f;--color-primary:#8fb8e6;--color-on-primary:#0e1a28;--color-accent:#e58a8a;--color-border:#51493a;--color-danger:#ff8a80;--color-success:#86c98f;--color-focus:#8ab4ff;--shadow-1:2px 3px 0 rgba(0,0,0,.5);--shadow-2:3px 5px 0 rgba(0,0,0,.6)}
+:root[data-mode=light]{color-scheme:light;--color-bg:#e9dfc9;--color-surface:#fffbee;--color-surface-2:#f1e6c7;--color-text:#2b2a33;--color-text-muted:#5d5a52;--color-primary:#2f5d8a;--color-on-primary:#fff;--color-accent:#a33a3a;--color-border:#cdbb8f;--color-danger:#a52222;--color-success:#2f6f3a;--color-focus:#0b5cd5;--shadow-1:2px 3px 0 rgba(120,95,40,.25);--shadow-2:3px 5px 0 rgba(120,95,40,.35)}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:var(--font-body);font-size:var(--font-size-base);line-height:1.55}
+h1,h2,h3,h4{font-family:var(--font-heading);line-height:1.2;margin:0}
+main{max-width:720px;margin:0 auto;padding:var(--space-3) var(--space-4) var(--space-6)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:var(--space-3);padding:var(--space-3) var(--space-4);background:var(--color-primary);color:var(--color-on-primary)}
+.brand{font-size:1.5rem}
+.tabs{display:flex;gap:var(--space-2);overflow-x:auto;padding:var(--space-2) var(--space-4);background:var(--color-surface-2);border-bottom:1px solid var(--color-border)}
+.tabs a{flex:none;min-height:44px;display:flex;align-items:center;padding:0 var(--space-3);color:var(--color-text);text-decoration:none;font-weight:600;border-radius:var(--radius-md)}
+.tabs a:hover{background:var(--color-surface)}
+.sec{font-size:1.6rem;margin:var(--space-5) 0 var(--space-3);color:var(--color-primary)}
+h3{font-size:1.35rem} h4{font-size:1.25rem;margin:var(--space-4) 0 var(--space-2)}
+.muted,small{color:var(--color-text-muted)} small{display:block;font-size:.9rem;margin-top:4px}
+.panel,.card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);box-shadow:var(--shadow-1)}
+.panel{padding:var(--space-4)}
+.cards{list-style:none;margin:0;padding:0;display:grid;gap:var(--space-3)}
+.card{display:flex;overflow:hidden;min-height:44px}
+.card:hover{box-shadow:var(--shadow-2)}
+.cb{padding:var(--space-3);min-width:0}
+.cb p{margin:4px 0}
+.ph{flex:none;width:96px;display:grid;place-items:center;font-size:2.5rem;background:var(--color-surface-2);border-right:1px solid var(--color-border)}
+.ph.hero{width:100%;height:180px;font-size:4rem;border:0;border-radius:var(--radius-md);margin-bottom:var(--space-3)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 0}
+.tag{background:var(--color-accent);color:var(--color-bg);border-radius:99px;padding:2px 12px;font-size:.9rem}
+.chips{display:flex;gap:var(--space-2);flex-wrap:wrap;margin:var(--space-3) 0}
+.chip{min-height:44px;padding:0 var(--space-4);border:1px solid var(--color-border);background:var(--color-surface);color:var(--color-text);border-radius:99px;font:inherit;font-weight:600}
+.chip.on{background:var(--color-primary);color:var(--color-on-primary);border-color:var(--color-primary)}
+.ing{list-style:none;padding:0;margin:0}
+.ing li{padding:10px 0;border-bottom:1px dashed var(--color-border)}
+.ing b{color:var(--color-primary)}
+.steps{margin:0;padding:0;list-style:none;counter-reset:s}
+.steps li{counter-increment:s;position:relative;padding:var(--space-2) 0 var(--space-2) 52px;min-height:44px}
+.steps li::before{content:counter(s);position:absolute;left:0;top:var(--space-2);width:38px;height:38px;border-radius:50%;background:var(--color-primary);color:var(--color-on-primary);display:grid;place-items:center;font-weight:700;font-family:var(--font-heading)}
+.field{display:block;margin-bottom:var(--space-3)}
+.field>span{display:block;font-weight:600;margin-bottom:4px}
+input,select,textarea{width:100%;min-height:48px;padding:10px var(--space-3);font:inherit;color:var(--color-text);background:var(--color-bg);border:2px solid var(--color-border);border-radius:var(--radius-md)}
+input[type=checkbox]{width:28px;min-height:28px;accent-color:var(--color-primary)}
+.check{display:flex;align-items:center;gap:var(--space-3);min-height:44px;margin-bottom:var(--space-3)}
+:focus-visible{outline:3px solid var(--color-focus);outline-offset:2px}
+fieldset{border:1px solid var(--color-border);border-radius:var(--radius-md);margin:0 0 var(--space-3);padding:var(--space-3)}
+legend{font-weight:700;padding:0 6px}
+.grid3{display:grid;grid-template-columns:1fr 1.2fr;gap:0 var(--space-3)} .grid3 .wide{grid-column:1/-1}
+.invalid input{border-color:var(--color-danger)} .err{color:var(--color-danger);font-weight:600}
+.row{display:flex;gap:var(--space-3);flex-wrap:wrap;margin-top:var(--space-4)}
+.btn{min-height:48px;padding:0 var(--space-4);font:inherit;font-weight:700;color:var(--color-text);background:var(--color-surface-2);border:2px solid var(--color-border);border-radius:var(--radius-md);cursor:pointer}
+.btn.primary{background:var(--color-primary);color:var(--color-on-primary);border-color:var(--color-primary)}
+.btn.danger{background:transparent;color:var(--color-danger);border-color:var(--color-danger)}
+.btn.ghost{background:transparent;color:inherit;border-color:currentColor}
+.btn.sm{min-height:44px}
+.toast{display:flex;justify-content:space-between;align-items:center;gap:var(--space-3);padding:var(--space-3) var(--space-4);margin-bottom:var(--space-3);border-radius:var(--radius-md);border-left:6px solid;background:var(--color-surface);box-shadow:var(--shadow-2);font-weight:600}
+.toast.ok{border-color:var(--color-success)} .toast.bad{border-color:var(--color-danger)}
+@media (prefers-reduced-motion:no-preference){.btn,.card{transition:box-shadow .15s,transform .1s}.btn:active{transform:scale(.98)}}
+
+h1,h2,h3,h4{font-weight:700}.brand{font-size:2.1rem}.sec{font-size:2.2rem}h3{font-size:1.9rem}h4{font-size:1.7rem}.title{font-size:2.4rem}
+body{background-image:repeating-linear-gradient(0deg,transparent 0 31px,color-mix(in srgb,var(--color-border) 35%,transparent) 31px 32px)}
+.panel,.card{background-image:repeating-linear-gradient(0deg,transparent 0 31px,color-mix(in srgb,var(--color-border) 40%,transparent) 31px 32px);border-left:4px double var(--color-accent)}
+.tag{background:transparent;color:var(--color-accent);border:2px solid var(--color-accent);border-radius:4px;font-family:var(--font-heading);font-size:1.2rem;transform:rotate(-1.5deg)}
+.steps li::before{border-radius:4px;font-size:1.5rem}
+</style>
+</head>
+<body>
+<header class="top"><h1 class="brand">Family Recipes</h1>
+<button class="btn ghost" id="mode" type="button" aria-label="Toggle light or dark">◐ Light/Dark</button></header>
+<nav class="tabs" aria-label="Sections">
+<a href="#list">Recipes</a><a href="#detail">Recipe</a><a href="#edit">Edit</a><a href="#settings">Settings</a><a href="#states">Toast</a></nav>
+<main>
+<section id="list"><h2 class="sec">Recipe list</h2>
+<label class="field"><span>Search</span><input type="search" placeholder="Search recipes…"></label>
+<div class="chips" role="group" aria-label="Categories"><button class="chip on">All</button><button class="chip">Soups</button><button class="chip">Cakes</button><button class="chip">Dinners</button></div>
+<ul class="cards">
+<li class="card"><div class="ph" aria-hidden="true">🍲</div><div class="cb"><h3>Rosół z kurczaka</h3><p class="muted">Soups · 2 h</p><p class="tags"><span class="tag">Sunday</span><span class="tag">Family</span></p></div></li>
+<li class="card"><div class="ph" aria-hidden="true">🍰</div><div class="cb"><h3>Sernik krakowski</h3><p class="muted">Cakes · 1 h 30 min</p><p class="tags"><span class="tag">Christmas</span><span class="tag">Baked</span></p></div></li>
+<li class="card"><div class="ph" aria-hidden="true">🥟</div><div class="cb"><h3>Pierogi ruskie</h3><p class="muted">Dinners · 1 h 15 min</p><p class="tags"><span class="tag">Vegetarian</span></p></div></li>
+</ul></section>
+
+<section id="detail"><h2 class="sec">Recipe detail</h2>
+<article class="panel">
+<div class="ph hero" aria-hidden="true">🍰</div>
+<h3 class="title">Sernik krakowski</h3>
+<p class="muted">Cakes · serves 12 · 1 h 30 min</p>
+<p class="tags"><span class="tag">Christmas</span><span class="tag">Baked</span></p>
+<h4>Ingredients</h4>
+<ul class="ing">
+<li><b>1 kg</b> twaróg tłusty (full-fat quark)</li>
+<li><b>250 g</b> masło</li>
+<li><b>1 szklanka</b> cukru</li>
+<li><b>6</b> jajek</li>
+<li><b>2 łyżki</b> mąki ziemniaczanej</li>
+<li><b>1 łyżeczka</b> aromatu waniliowego</li>
+<li><b>1 szczypta</b> soli</li>
+<li><b>2 opak.</b> budyniu waniliowego</li></ul>
+<h4>Steps</h4>
+<ol class="steps">
+<li>Cream the butter with sugar until fluffy, then add the yolks one by one.</li>
+<li>Mix in the quark, potato flour and vanilla until smooth.</li>
+<li>Whisk the whites with a pinch of salt and fold in gently.</li>
+<li>Bake at 170 °C for 70 minutes. Cool in the oven with the door ajar.</li></ol>
+<div class="row"><button class="btn primary">Edit recipe</button><button class="btn danger">Delete</button></div>
+</article></section>
+
+<section id="edit"><h2 class="sec">Edit form</h2>
+<form class="panel" onsubmit="return false">
+<label class="field"><span>Title</span><input value="Sernik krakowski"></label>
+<label class="field"><span>Category</span><select><option>Cakes</option><option>Soups</option><option>Dinners</option></select></label>
+<label class="field"><span>Tags</span><input value="Christmas, Baked"><small>Separate with commas</small></label>
+<fieldset><legend>Ingredient</legend>
+<div class="grid3"><label class="field"><span>Amount</span><input inputmode="decimal" value="1"></label>
+<label class="field"><span>Unit</span><select><option>kg</option><option>g</option><option>szklanka</option><option>łyżka</option><option>łyżeczka</option><option>szczypta</option></select></label>
+<label class="field wide"><span>Name</span><input value="twaróg tłusty"></label></div></fieldset>
+<button class="btn" type="button">+ Add ingredient</button>
+<label class="field" style="margin-top:12px"><span>Step 1</span><textarea rows="3">Cream the butter with sugar until fluffy.</textarea></label>
+<label class="field invalid"><span>Servings</span><input value="abc" aria-invalid="true"><small class="err">Enter a number, e.g. 12</small></label>
+<div class="row"><button class="btn primary">Save</button><button class="btn">Cancel</button></div>
+</form></section>
+
+<section id="settings"><h2 class="sec">Settings</h2>
+<div class="panel">
+<h3>GitHub backup</h3>
+<label class="field" style="margin-top:12px"><span>Access token</span><input type="password" value="test-token-0000" autocomplete="off"></label>
+<label class="field"><span>Passphrase</span><input type="password" value="correct horse" autocomplete="off"><small>Needed to restore. It cannot be recovered.</small></label>
+<label class="check"><input type="checkbox" checked><span>Back up automatically</span></label>
+<div class="row"><button class="btn primary">Back up now</button><button class="btn">Restore…</button></div>
+<p class="muted">Last backup: today, 18:42</p>
+</div></section>
+
+<section id="states"><h2 class="sec">Toast &amp; error</h2>
+<div class="toast ok" role="status"><span>✓ Backup saved to GitHub</span><button class="btn ghost sm">Dismiss</button></div>
+<div class="toast bad" role="alert"><span>✕ Couldn't reach GitHub. Check your connection.</span><button class="btn ghost sm">Retry</button></div>
+</section>
+</main>
+<script>
+(function(){var r=document.documentElement,b=document.getElementById('mode');
+b.addEventListener('click',function(){var m=r.getAttribute('data-mode');var d=m?m==='dark':matchMedia('(prefers-color-scheme: dark)').matches;r.setAttribute('data-mode',d?'light':'dark');});})();
+</script>
+</body>
+</html>

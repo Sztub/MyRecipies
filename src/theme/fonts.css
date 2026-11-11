@@ -1,0 +1,38 @@
+/*
+ * Self-hosted theme fonts (work offline; the PWA precaches the woff2 files).
+ * Only latin + latin-ext subsets (Polish letters). The browser downloads a face only when a theme uses it.
+ */
+
+/* ksiazka – Książka kucharska */
+@import '@fontsource/eb-garamond/latin-400.css';
+@import '@fontsource/eb-garamond/latin-ext-400.css';
+@import '@fontsource/eb-garamond/latin-400-italic.css';
+@import '@fontsource/eb-garamond/latin-ext-400-italic.css';
+@import '@fontsource/eb-garamond/latin-600.css';
+@import '@fontsource/eb-garamond/latin-ext-600.css';
+@import '@fontsource/cormorant-garamond/latin-600.css';
+@import '@fontsource/cormorant-garamond/latin-ext-600.css';
+@import '@fontsource/cormorant-garamond/latin-700.css';
+@import '@fontsource/cormorant-garamond/latin-ext-700.css';
+@import '@fontsource/cormorant-garamond/latin-600-italic.css';
+@import '@fontsource/cormorant-garamond/latin-ext-600-italic.css';
+
+/* notes – old notepad (Caveat = headings, Patrick Hand = body) */
+@import '@fontsource/caveat/latin-400.css';
+@import '@fontsource/caveat/latin-ext-400.css';
+@import '@fontsource/caveat/latin-700.css';
+@import '@fontsource/caveat/latin-ext-700.css';
+@import '@fontsource/patrick-hand/latin-400.css';
+@import '@fontsource/patrick-hand/latin-ext-400.css';
+
+/* zielnik – herbarium (Fraunces = headings, Nunito = body) */
+@import '@fontsource/fraunces/latin-500.css';
+@import '@fontsource/fraunces/latin-ext-500.css';
+@import '@fontsource/fraunces/latin-500-italic.css';
+@import '@fontsource/fraunces/latin-ext-500-italic.css';
+@import '@fontsource/nunito/latin-400.css';
+@import '@fontsource/nunito/latin-ext-400.css';
+@import '@fontsource/nunito/latin-600.css';
+@import '@fontsource/nunito/latin-ext-600.css';
+@import '@fontsource/nunito/latin-700.css';
+@import '@fontsource/nunito/latin-ext-700.css';

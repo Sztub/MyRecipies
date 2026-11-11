@@ -1,0 +1,65 @@
+# GitHub Pages deploy – PREPARED BUT NOT ENABLED.
+#
+# Right now this only runs when you start it by hand (Actions tab -> "Deploy to GitHub Pages" -> Run workflow),
+# and that only works after Pages is switched on (README.md, "Setting it up").
+#
+# To deploy automatically on every push to main later: replace the `on:` block below with
+#
+#   on:
+#     push:
+#       branches: [main]
+#     workflow_dispatch:
+#
+# The app is built for the address https://<user>.github.io/MyRecipies/ (VITE_BASE=/MyRecipies/).
+# If you pick a different address (other repo name or custom domain), change VITE_BASE to match
+# AND read the address notes in README.md ("Setting it up") and docs/HOW-IT-WORKS.md ("Origin = trust boundary") first.
+#
+# Actions are pinned to full commit SHAs (tag in the comment): this workflow publishes the site that holds the
+# backup key, so a moved or hijacked tag must not be able to change what runs. Dependabot
+# (.github/dependabot.yml) proposes updates as PRs; check the release notes before merging them.
+name: Deploy to GitHub Pages
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - name: Build
+        run: npm run build
+        env:
+          VITE_BASE: /MyRecipies/
+      # GitHub Pages has no SPA fallback: a reload on /MyRecipies/settings would show a 404.
+      # Serving index.html as 404.html lets the app (and its router) take over.
+      - name: SPA fallback
+        run: cp dist/index.html dist/404.html
+      - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5

@@ -1,0 +1,90 @@
+.picker {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.item {
+  position: relative;
+}
+.thumb {
+  display: block;
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  background: var(--color-surface-2);
+}
+.placeholder {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 96px;
+  min-height: 96px;
+  background: var(--color-surface-2);
+  color: var(--color-text-muted);
+  border-radius: var(--radius-md);
+  font-size: 0.75rem;
+  text-align: center;
+}
+.remove {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 44px;
+  min-height: 44px;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--color-on-primary);
+  font-size: 1.5rem;
+  cursor: pointer;
+  text-shadow: 0 0 4px var(--color-text);
+}
+.remove:focus-visible {
+  outline: 2px solid var(--color-focus);
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text);
+  cursor: pointer;
+}
+.button:focus-within {
+  outline: 2px solid var(--color-focus);
+}
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.error {
+  margin: 0;
+  color: var(--color-danger);
+}

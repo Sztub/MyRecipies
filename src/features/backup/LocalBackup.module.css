@@ -1,0 +1,133 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.title {
+  margin: 0;
+}
+.subtitle {
+  margin: 0 0 var(--space-2);
+  font-size: 1rem;
+}
+.block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+.hint {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+.primary,
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font: inherit;
+  cursor: pointer;
+}
+.primary {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  background-image: var(--gradient-primary);
+}
+.secondary {
+  background: transparent;
+  color: var(--color-text);
+}
+.primary:disabled,
+.secondary:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+/* Visually hidden but focusable; the <label> acts as the button. */
+.fileInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.fileInput:focus-visible + .secondary {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+.preview,
+.report {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.facts {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-1) var(--space-3);
+  margin: 0;
+}
+.facts dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.mono {
+  font-family: monospace;
+  font-size: 0.85em;
+}
+.modes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+  padding: var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+.mode {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  min-height: 44px;
+  cursor: pointer;
+}
+.mode input {
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  flex: none;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+.warning {
+  margin: 0;
+  color: var(--color-danger);
+  font-weight: 600;
+}
+.status {
+  margin: 0;
+}
+.error {
+  margin: 0;
+  color: var(--color-danger);
+}
+.table {
+  border-collapse: collapse;
+}
+.table th,
+.table td {
+  padding: var(--space-1) var(--space-2);
+  text-align: left;
+}

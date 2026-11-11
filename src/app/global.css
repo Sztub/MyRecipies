@@ -1,0 +1,34 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+/* No rubber-band / overscroll on phones: dragging past the page edge would reveal the bare canvas,
+   which doesn't match the header, bottom bar or vignette. Also turns off pull-to-refresh (app-like PWA). */
+html {
+  background-color: var(--color-bg);
+  overscroll-behavior: none;
+}
+body {
+  margin: 0;
+  overscroll-behavior: none;
+  background: var(--color-bg);
+  background-image: var(--texture-bg);
+  background-attachment: fixed;
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+}
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* Theme ornaments (src/theme/Ornaments.tsx) are hidden unless a theme's *.decor.css shows them. */
+[data-ornament] {
+  display: none;
+}

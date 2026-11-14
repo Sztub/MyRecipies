@@ -11,6 +11,13 @@ Vite + React 18 + TS PWA for family recipes with encrypted GitHub backup and two
 - Mobile first (375 px), must also work on desktop. Touch targets >= 44 px.
 - Line endings LF. Commit locally; never push without human approval.
 
+## Repositories
+
+- **Current:** `github.com/Sztub/MyRecipies` (this checkout, `origin`, branch `main`). All work and pushes go here; it also
+  hosts the app on GitHub Pages (`/MyRecipies/`).
+- **Old:** `github.com/Sztub/Recipies`, checked out next to this one in `../Recipies-history-backup`. History backup from
+  before the move (Nov 2026) – read-only: never commit or push there, and don't act on its PRs or Dependabot alerts.
+
 ## Where things live
 
 - `src/db` – Dexie: `recipes`/`categories`/`tags` repos (`save` bumps `rev`, `softDelete` = tombstone, `putRaw` for import), `photos`, `settings`, `getDeviceId()`.

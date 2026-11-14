@@ -11,3 +11,11 @@ test-results
 *.tsbuildinfo
 tests/e2e/.tmp
 .claude/launch.json
+
+# Data and secrets never belong in this repo
+*.db*
+*.sqlite*
+*.bak
+backups/
+*.pem
+*.key
